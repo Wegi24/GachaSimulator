@@ -73,7 +73,7 @@
         </StackPanel>
          <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
           
-            <CheckBox  Margin="25" HorizontalAlignment="Center" Command="{Binding MoneyCheck}"/>
+            <CheckBox  Margin="25" HorizontalAlignment="Center" Command="{Binding MoneyCheck}" IsChecked="True"/>
             <CheckBox  Margin="25" HorizontalAlignment="Center" Command="{Binding GameCurrCheck}"/>
             <CheckBox  Margin="30" HorizontalAlignment="Center" Command="{Binding TenShotCheck}"/>
         </StackPanel>
