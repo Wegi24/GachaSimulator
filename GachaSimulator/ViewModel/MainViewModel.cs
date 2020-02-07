@@ -104,6 +104,9 @@ namespace GachaSimulator.ViewModel
 
             InitiateComboBoxCommands();
 
+            //Because SelMoney is ticked in xaml
+            ComboTmp = "Money";
+
         }
 
 
