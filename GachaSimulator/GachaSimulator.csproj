@@ -113,7 +113,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Imgs\Arkgnits-main.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Imgs\feh_icon.jpg" />
   </ItemGroup>

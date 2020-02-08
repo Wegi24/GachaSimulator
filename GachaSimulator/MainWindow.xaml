@@ -29,22 +29,27 @@
             <Label Content="Gacha Simulator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
         </Border>
 
-        <Button Grid.Row="1" Width="50" Height="50" Background="Transparent" Command="{Binding DragClick}">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+        <Button Margin="40,0,40,0" Grid.Row="1" Width="50" Height="50" Background="Transparent" Command="{Binding DragClick}">
             <Image Source="Imgs/dragalialost-icon.jpg"/>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="1" Width="50" Height="50" Background="Transparent" Command="{Binding FehClick}">
+            <Button Margin="40,0,40,0" Grid.Row="1" Width="50" Height="50" Background="Transparent" Command="{Binding ArkClick}">
+            <Image Source="Imgs/Arkgnits-main.jpg"/>
+        </Button>
+
+            <Button Margin="40,0,40,0" Grid.Row="1" Grid.Column="1" Width="50" Height="50" Background="Transparent" Command="{Binding FehClick}">
             <Image Source="Imgs/feh_icon.jpg"/>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="2" Width="50" Height="50" Background="Transparent" Command="{Binding FgoClick}">
+            <Button Margin="40,0,40,0" Grid.Row="1" Grid.Column="2" Width="50" Height="50" Background="Transparent" Command="{Binding FgoClick}">
             <Image Source="Imgs/fgo_icon.jpg"/>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="3" Width="50" Height="50" Background="Transparent" Command="{Binding PkmnClick}">
+            <Button Margin="40,0,40,0" Grid.Row="1" Grid.Column="3" Width="50" Height="50" Background="Transparent" Command="{Binding PkmnClick}">
             <Image Source="Imgs/pokemon-masters_icon.jpg"/>
         </Button>
-
+        </StackPanel>
         <Border Grid.Row="2" Grid.ColumnSpan="4" BorderThickness="0,1,0,0" BorderBrush="Black">
             <Label Content="{Binding SelGameDesc}" Grid.ColumnSpan="4" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
@@ -63,7 +68,7 @@
             <TextBox Margin="5" HorizontalAlignment="Center" Text="{Binding TenShotNr, UpdateSourceTrigger=PropertyChanged, StringFormat=N2, ConverterCulture=de-DE}"/>
 
             <Label Margin="5"  Content="Chances" Foreground="White"  BorderThickness="0,1,0,0" BorderBrush="#FF6F6D6D" HorizontalAlignment="Center"/>
-            <TextBox Margin="5" HorizontalAlignment="Center" Text="{Binding PercOfSucc, StringFormat=N2, ConverterCulture=de-DE}"/>
+            <TextBox Margin="5" HorizontalAlignment="Center" Text="{Binding PercOfSucc, StringFormat=N2, ConverterCulture=de-DE}" IsReadOnly="True"/>
 
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0">

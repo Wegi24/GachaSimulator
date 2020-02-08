@@ -79,7 +79,7 @@ namespace GachaSimulator.ViewModel
         public RelayCommand DragClick { get; set; }
         public RelayCommand FgoClick { get; set; }
         public RelayCommand PkmnClick { get; set; }
-
+        public RelayCommand ArkClick { get; set; }
 
         //Checkbox RelayCommands
         private string ComboTmp;
@@ -94,6 +94,8 @@ namespace GachaSimulator.ViewModel
 
         public MainViewModel()
         {
+            //Todo make it possible for Rates to be changed
+
             Gamelist = new List<GameVM>();
             GenGamelist();
 
@@ -223,6 +225,17 @@ namespace GachaSimulator.ViewModel
            {
                return SelGame != Gamelist[3];
            });
+            ArkClick = new RelayCommand(
+            () =>
+            {
+                SelGame = Gamelist[4];
+                SetGameAttributes();
+                CheckCarryValue();
+            },
+            () =>
+            {
+                return SelGame != Gamelist[4];
+            });
         }
 
         private void CheckCarryValue()
@@ -254,6 +267,7 @@ namespace GachaSimulator.ViewModel
             Gamelist.Add(new GameVM("Dragalia Lost", "Wyrmite"));
             Gamelist.Add(new GameVM("Pokemon Masters", "Gems"));
             Gamelist.Add(new GameVM("Fate/Grand Order", "Saint Quarz"));
+            Gamelist.Add(new GameVM("Arknights", "Orundum"));
         }
     }
 }
