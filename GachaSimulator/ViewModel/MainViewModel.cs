@@ -22,7 +22,7 @@ namespace GachaSimulator.ViewModel
 
         private void OnMoneyChange()
         {
-            if (SelMoney != 0)
+            if (SelMoney != 0|| SelGameCurr != SelGame.exchangeRate * SelMoney)
                 SelGameCurr = SelGame.exchangeRate * SelMoney;
 
         }
@@ -42,8 +42,6 @@ namespace GachaSimulator.ViewModel
 
         private void CalculatePercentage()
         {
-
-
             PercOfSucc = 1.00 - Math.Pow(CalcPerc, TenShotNr * 10);
         }
 
@@ -53,6 +51,7 @@ namespace GachaSimulator.ViewModel
 
         private void OnTenShotChange()
         {
+            if(SelGameCurr != TenShotNr * SelGame.tenShotCost)
             SelGameCurr = TenShotNr * SelGame.tenShotCost;
         }
 
@@ -60,8 +59,9 @@ namespace GachaSimulator.ViewModel
 
         //Percentage in GUI
         public double GUIPercentage { get => gUIPercentage; set { gUIPercentage = value;  RaisePropertyChanged(); SetCalcPercentage(); } }
+        //variable for calculations
         public double CalcPerc { get; set; }
-
+        //Override percentage y/n, standard no
         private bool OverridePerc = false;
         #endregion
 
@@ -90,14 +90,15 @@ namespace GachaSimulator.ViewModel
         private void SetCalcPercentage()
         {
             
-
+            //Override Percentage
             if (OverridePerc == true)
             {
                 CalcPerc = 1 - GUIPercentage;
                 CalculatePercentage();
             }
-            else
+            else   //dont Override Percentage
             {
+               
                 if (GUIPercentage != 1 - SelGame.antiPercentage)
                 {
                     GUIPercentage = 1 - SelGame.antiPercentage;
@@ -113,7 +114,7 @@ namespace GachaSimulator.ViewModel
 
         public MainViewModel()
         {
-            //Todo make it possible for Rates to be changed
+            
 
             Gamelist = new List<GameVM>();
             GenGamelist();
@@ -142,7 +143,7 @@ namespace GachaSimulator.ViewModel
                   if (OverridePerc == false)
                   {
                       OverridePerc = true;
-                      SetCalcPercentage();
+                     
                   }
                   else
                   {
