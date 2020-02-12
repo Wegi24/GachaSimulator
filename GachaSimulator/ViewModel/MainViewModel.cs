@@ -6,18 +6,7 @@ using System.Threading;
 
 namespace GachaSimulator.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
         //Textboxes inkl refresh functions
@@ -42,20 +31,23 @@ namespace GachaSimulator.ViewModel
 
         private void OnGameCurrChange()
         {
-            if(TenShotNr!= SelGameCurr / SelGame.tenShotCost)
-            TenShotNr = SelGameCurr / SelGame.tenShotCost;
-
+            if (TenShotNr != SelGameCurr / SelGame.tenShotCost)
+                TenShotNr = SelGameCurr / SelGame.tenShotCost;
 
             CalculatePercentage();
+
             if (SelMoney != SelGameCurr / SelGame.exchangeRate)
                 SelMoney = SelGameCurr / SelGame.exchangeRate;
         }
 
         private void CalculatePercentage()
         {
-               PercOfSucc = 1.00 - Math.Pow(SelGame.antiPercentage, TenShotNr * 10);
+
+
+            PercOfSucc = 1.00 - Math.Pow(CalcPerc, TenShotNr * 10);
         }
-        
+
+
 
         public double TenShotNr { get => tenShotNr; set { tenShotNr = value; RaisePropertyChanged(); OnTenShotChange(); } }
 
@@ -66,13 +58,18 @@ namespace GachaSimulator.ViewModel
 
         public double PercOfSucc { get => percOfSucc; set { percOfSucc = value; RaisePropertyChanged(); } }
 
+        //Percentage in GUI
+        public double GUIPercentage { get => gUIPercentage; set { gUIPercentage = value;  RaisePropertyChanged(); SetCalcPercentage(); } }
+        public double CalcPerc { get; set; }
+
+        private bool OverridePerc = false;
         #endregion
 
         //Handling of Selected Game
         public GameVM SelGame { get; set; }
         public string SelGameDesc { get => selGameDesc; set { selGameDesc = value; RaisePropertyChanged(); } }
         public string SelGameCurrType { get => selGameCurrType; set { selGameCurrType = value; RaisePropertyChanged(); } }
-       
+
         //RelayCommands for Games
         public List<GameVM> Gamelist { get; set; }
         public RelayCommand FehClick { get; set; }
@@ -83,14 +80,36 @@ namespace GachaSimulator.ViewModel
 
         //Checkbox RelayCommands
         private string ComboTmp;
+        private double gUIPercentage;
+
         public RelayCommand MoneyCheck { get; set; }
         public RelayCommand GameCurrCheck { get; set; }
         public RelayCommand TenShotCheck { get; set; }
+        public RelayCommand OverridePercentageCheck { get; set; }
+
+        private void SetCalcPercentage()
+        {
+            
+
+            if (OverridePerc == true)
+            {
+                CalcPerc = 1 - GUIPercentage;
+                CalculatePercentage();
+            }
+            else
+            {
+                if (GUIPercentage != 1 - SelGame.antiPercentage)
+                {
+                    GUIPercentage = 1 - SelGame.antiPercentage;
+                    CalcPerc = SelGame.antiPercentage;
+                    CalculatePercentage();
+                }
+            }
+        }
 
 
-       
 
-        
+
 
         public MainViewModel()
         {
@@ -100,6 +119,8 @@ namespace GachaSimulator.ViewModel
             GenGamelist();
 
             SelGame = Gamelist[1];
+            SetCalcPercentage();
+
             SetGameAttributes();
 
             InitiateRelayCommands();
@@ -113,16 +134,30 @@ namespace GachaSimulator.ViewModel
 
 
         //Comboboxes only accessible if ComboTmp is null or checked(aka ComboTmp is filled respectively) 
-        private void InitiateComboBoxCommands() 
+        private void InitiateComboBoxCommands()
         {
+
+            OverridePercentageCheck = new RelayCommand(() =>
+              {
+                  if (OverridePerc == false)
+                  {
+                      OverridePerc = true;
+                      SetCalcPercentage();
+                  }
+                  else
+                  {
+                      OverridePerc = false;
+                      SetCalcPercentage();
+                  }
+              });
 
             MoneyCheck = new RelayCommand(() =>
             {
                 if (ComboTmp != null)
                 {
-                   
-                        ComboTmp = null;
-                    
+
+                    ComboTmp = null;
+
 
                 }
                 else
@@ -138,10 +173,10 @@ namespace GachaSimulator.ViewModel
             {
                 if (ComboTmp != null)
                 {
-                   
-                    
-                        ComboTmp = null;
-                    
+
+
+                    ComboTmp = null;
+
 
                 }
                 else
@@ -157,10 +192,10 @@ namespace GachaSimulator.ViewModel
             {
                 if (ComboTmp != null)
                 {
-                    
-                    
-                        ComboTmp = null;
-                    
+
+
+                    ComboTmp = null;
+
 
                 }
                 else
@@ -174,16 +209,17 @@ namespace GachaSimulator.ViewModel
         }
 
 
-        
+
         private void InitiateRelayCommands()
         {
-        //Sets SelGame, Attributes, Value that will be carried over
+            //Sets SelGame, Attributes, Value that will be carried over
             DragClick = new RelayCommand(
             () =>
             {
                 SelGame = Gamelist[1];
                 SetGameAttributes();
                 CheckCarryValue();
+                SetCalcPercentage();
             },
             () =>
             {
@@ -196,6 +232,7 @@ namespace GachaSimulator.ViewModel
                SelGame = Gamelist[0];
                SetGameAttributes();
                CheckCarryValue();
+               SetCalcPercentage();
            },
            () =>
            {
@@ -208,6 +245,7 @@ namespace GachaSimulator.ViewModel
                SelGame = Gamelist[2];
                SetGameAttributes();
                CheckCarryValue();
+               SetCalcPercentage();
            },
            () =>
            {
@@ -220,6 +258,7 @@ namespace GachaSimulator.ViewModel
                SelGame = Gamelist[3];
                SetGameAttributes();
                CheckCarryValue();
+               SetCalcPercentage();
            },
            () =>
            {
@@ -231,6 +270,7 @@ namespace GachaSimulator.ViewModel
                 SelGame = Gamelist[4];
                 SetGameAttributes();
                 CheckCarryValue();
+                SetCalcPercentage();
             },
             () =>
             {

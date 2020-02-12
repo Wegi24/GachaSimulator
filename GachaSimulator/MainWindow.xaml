@@ -82,6 +82,12 @@
             <CheckBox  Margin="25" HorizontalAlignment="Center" Command="{Binding GameCurrCheck}"/>
             <CheckBox  Margin="30" HorizontalAlignment="Center" Command="{Binding TenShotCheck}"/>
         </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center">
+            <Label Content="Override Percentage" Foreground="White"/>
+            <CheckBox HorizontalAlignment="Center" Margin="5" Command="{Binding OverridePercentageCheck}"/>
+            <TextBox HorizontalAlignment="Center" Text="{Binding GUIPercentage, UpdateSourceTrigger=PropertyChanged, StringFormat=N3, ConverterCulture=de-DE}" />
+        </StackPanel>
     </Grid>
 
 </Window>
