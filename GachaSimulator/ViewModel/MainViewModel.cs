@@ -10,7 +10,7 @@ namespace GachaSimulator.ViewModel
     public class MainViewModel : ViewModelBase
     {
         //Textboxes inkl refresh functions
-        #region 
+        #region GUI Felder
         private double selGameCurr;
         private double selMoney;
         private string selGameDesc;
