@@ -57,6 +57,8 @@ namespace GachaSimulator.ViewModel
 
         public double PercOfSucc { get => percOfSucc; set { percOfSucc = value; RaisePropertyChanged(); } }
 
+       
+
         //Percentage in GUI
         public double GUIPercentage { get => gUIPercentage; set { gUIPercentage = value;  RaisePropertyChanged(); SetCalcPercentage(); } }
         //variable for calculations

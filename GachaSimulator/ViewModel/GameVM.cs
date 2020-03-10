@@ -41,7 +41,7 @@ namespace GachaSimulator.ViewModel
             }
             else if (this.desc.Equals("Arknights"))
             {
-                exchangeRate =400;
+                exchangeRate =300;
                 tenShotCost = 6000;
                 antiPercentage = 0.99;
             }
