@@ -5,7 +5,7 @@ namespace GachaSimulator.ViewModel
     {
         public string desc;
         public string gameCurr;
-        public double exchangeRate;
+        public double exchangeRate; // = how much currency per €
         public int tenShotCost;
         public double antiPercentage;
 
@@ -41,9 +41,15 @@ namespace GachaSimulator.ViewModel
             }
             else if (this.desc.Equals("Arknights"))
             {
-                exchangeRate =300;
+                exchangeRate =375;  //varies between 300 and 450, depending on whether double bonus applies
                 tenShotCost = 6000;
                 antiPercentage = 0.99;
+            }
+            else if (this.desc.Equals("Epic Seven"))
+            {
+                exchangeRate = 1.82;
+                tenShotCost = 50;
+                antiPercentage = 0.9875;
             }
         }
 

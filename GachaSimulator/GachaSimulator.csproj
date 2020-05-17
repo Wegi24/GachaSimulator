@@ -128,5 +128,8 @@
   <ItemGroup>
     <Resource Include="Imgs\fgo_icon.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\EpicSeven.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

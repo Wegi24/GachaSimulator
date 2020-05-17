@@ -79,6 +79,7 @@ namespace GachaSimulator.ViewModel
         public RelayCommand FgoClick { get; set; }
         public RelayCommand PkmnClick { get; set; }
         public RelayCommand ArkClick { get; set; }
+        public RelayCommand EpicClick { get; set; }
 
         //Checkbox RelayCommands
         private string ComboTmp;
@@ -279,6 +280,18 @@ namespace GachaSimulator.ViewModel
             {
                 return SelGame != Gamelist[4];
             });
+            EpicClick = new RelayCommand(
+                () =>
+                {
+                    SelGame = Gamelist[5];
+                    SetGameAttributes();
+                    CheckCarryValue();
+                    SetCalcPercentage();
+                },
+                () =>
+                {
+                    return SelGame != Gamelist[5];
+                });
         }
 
         private void CheckCarryValue()
@@ -311,6 +324,7 @@ namespace GachaSimulator.ViewModel
             Gamelist.Add(new GameVM("Pokemon Masters", "Gems"));
             Gamelist.Add(new GameVM("Fate/Grand Order", "Saint Quarz"));
             Gamelist.Add(new GameVM("Arknights", "Orundum"));
+            Gamelist.Add(new GameVM("Epic Seven", "Bookmarks"));
         }
     }
 }
